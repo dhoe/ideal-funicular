@@ -1,0 +1,25 @@
+{
+  "name": "taskmaitre-automation",
+  "version": "1.0.0",
+  "description": "Automated login and data extraction for TaskMaitre using Puppeteer",
+  "main": "puppeteer-login.js",
+  "scripts": {
+    "start": "node puppeteer-login.js",
+    "start:visible": "HEADLESS=false node puppeteer-login.js",
+    "http": "node login.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:57591/git/dhoe/ideal-funicular"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.13.1",
+    "cheerio": "^1.1.2",
+    "https-proxy-agent": "^7.0.6",
+    "playwright": "^1.56.1",
+    "puppeteer-core": "^24.27.0"
+  }
+}

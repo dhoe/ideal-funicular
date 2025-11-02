@@ -2,6 +2,8 @@
 
 This script uses the [Semantic Scholar API](https://api.semanticscholar.org/) to search for academic papers on emotional regulation in essential tremor.
 
+Available in both **JavaScript (Node.js)** and **Python** versions.
+
 ## Features
 
 - Search the Semantic Scholar database for relevant papers
@@ -18,33 +20,76 @@ This script uses the [Semantic Scholar API](https://api.semanticscholar.org/) to
 
 ## Installation
 
+### JavaScript/Node.js Version
+
 Install dependencies:
 
 ```bash
 npm install
 ```
 
+### Python Version
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Or install requests directly:
+
+```bash
+pip install requests
+```
+
 ## Usage
 
-### Run the script directly:
+### JavaScript/Node.js
+
+Run the script directly:
 
 ```bash
 node semantic-scholar-search.js
 ```
 
-### Or use the npm script:
+Or use the npm script:
 
 ```bash
 npm run search-papers
 ```
 
+### Python
+
+Run the script directly:
+
+```bash
+python3 semantic-scholar-search.py
+```
+
+Or make it executable and run:
+
+```bash
+./semantic-scholar-search.py
+```
+
 ## Configuration
 
-The script can be customized by editing the `main()` function in `semantic-scholar-search.js`:
+### JavaScript Version
+
+Edit the `main()` function in `semantic-scholar-search.js`:
 
 ```javascript
 const query = 'emotional regulation essential tremor';  // Change search query
 const limit = 50;  // Adjust number of results (max: 100)
+```
+
+### Python Version
+
+Edit the `main()` function in `semantic-scholar-search.py`:
+
+```python
+query = 'emotional regulation essential tremor'  # Change search query
+limit = 50  # Adjust number of results (max: 100)
 ```
 
 ## Output

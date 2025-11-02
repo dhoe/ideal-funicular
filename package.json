@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node puppeteer-login.js",
     "start:visible": "HEADLESS=false node puppeteer-login.js",
-    "http": "node login.js"
+    "http": "node login.js",
+    "search-papers": "node semantic-scholar-search.js"
   },
   "repository": {
     "type": "git",

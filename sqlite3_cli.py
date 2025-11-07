@@ -30,6 +30,9 @@ class SQLite3CLI:
         self.echo = False
         self.bail_on_error = False
 
+        # Transaction tracking
+        self.in_transaction = False
+
         # Command history
         self.history = []
 
@@ -54,6 +57,15 @@ class SQLite3CLI:
             if self.echo:
                 print(sql)
 
+            # Check for transaction control statements
+            sql_upper = sql.strip().upper()
+            if sql_upper.startswith('BEGIN'):
+                self.in_transaction = True
+            elif sql_upper in ('COMMIT', 'END'):
+                self.in_transaction = False
+            elif sql_upper == 'ROLLBACK':
+                self.in_transaction = False
+
             self.cursor.execute(sql)
 
             # Check if this is a SELECT or similar query that returns rows
@@ -61,7 +73,9 @@ class SQLite3CLI:
                 self.display_results(self.cursor.fetchall(), self.cursor.description)
             else:
                 # For INSERT, UPDATE, DELETE, etc.
-                self.conn.commit()
+                # Only auto-commit if not in an explicit transaction
+                if not self.in_transaction:
+                    self.conn.commit()
 
             return True
         except sqlite3.Error as e:

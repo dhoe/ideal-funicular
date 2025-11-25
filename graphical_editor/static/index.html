@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphical Code Editor - Python Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>🔍 Graphical Code Editor</h1>
+            <div class="controls">
+                <div class="zoom-level-indicator">
+                    <span class="level-label">Zoom Level:</span>
+                    <span id="current-level" class="level-badge">Architecture</span>
+                </div>
+                <div class="zoom-controls">
+                    <button id="zoom-out" title="Zoom Out">−</button>
+                    <input type="range" id="zoom-slider" min="0.1" max="4" step="0.1" value="1">
+                    <button id="zoom-in" title="Zoom In">+</button>
+                    <button id="zoom-reset" title="Reset View">⌂</button>
+                </div>
+                <div class="file-controls">
+                    <button id="load-sample">Load Sample</button>
+                    <label class="file-upload">
+                        <input type="file" id="file-input" accept=".py" multiple webkitdirectory>
+                        📁 Load Python Files
+                    </label>
+                </div>
+            </div>
+        </header>
+
+        <div id="sidebar">
+            <h3>Modules</h3>
+            <ul id="module-list"></ul>
+
+            <h3>Legend</h3>
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="legend-color module-color"></span>
+                    <span>Module</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color class-color"></span>
+                    <span>Class</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color function-color"></span>
+                    <span>Function</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-arrow">→</span>
+                    <span>Import</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-arrow inheritance">⇢</span>
+                    <span>Inheritance</span>
+                </div>
+            </div>
+
+            <h3>Zoom Levels</h3>
+            <div class="zoom-levels-info">
+                <div class="zoom-info" data-level="1">
+                    <strong>1. Architecture</strong>
+                    <p>Boxes & arrows overview</p>
+                </div>
+                <div class="zoom-info" data-level="2">
+                    <strong>2. Signatures</strong>
+                    <p>Function signatures visible</p>
+                </div>
+                <div class="zoom-info" data-level="3">
+                    <strong>3. Code</strong>
+                    <p>Full source code</p>
+                </div>
+            </div>
+        </div>
+
+        <main id="canvas-container">
+            <svg id="canvas">
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+                            refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#666"/>
+                    </marker>
+                    <marker id="arrowhead-inheritance" markerWidth="12" markerHeight="8"
+                            refX="11" refY="4" orient="auto">
+                        <polygon points="0 0, 12 4, 0 8" fill="none" stroke="#9b59b6" stroke-width="1"/>
+                    </marker>
+                </defs>
+                <g id="zoom-group">
+                    <g id="links-layer"></g>
+                    <g id="nodes-layer"></g>
+                </g>
+            </svg>
+            <div id="tooltip" class="tooltip"></div>
+        </main>
+
+        <div id="code-panel" class="hidden">
+            <div class="code-panel-header">
+                <h3 id="code-panel-title">Code</h3>
+                <button id="close-code-panel">×</button>
+            </div>
+            <pre><code id="code-content" class="language-python"></code></pre>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

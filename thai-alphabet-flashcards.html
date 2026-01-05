@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Alphabet Flashcards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            opacity: 0.9;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            min-height: 400px;
+            cursor: pointer;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .card-front {
+            background: white;
+        }
+
+        .card-back {
+            background: #f8f9fa;
+            transform: rotateY(180deg);
+        }
+
+        .thai-letter {
+            font-size: 12em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        .card-hint {
+            color: #999;
+            font-size: 1em;
+            margin-top: 20px;
+        }
+
+        .card-info {
+            width: 100%;
+            text-align: left;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 1.3em;
+            margin-top: 5px;
+        }
+
+        .class-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .class-high {
+            background: #dc3545;
+        }
+
+        .class-mid {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .class-low {
+            background: #28a745;
+        }
+
+        .interesting-info {
+            background: #fff3cd;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ffc107;
+            margin-top: 5px;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-reveal {
+            background: #667eea;
+        }
+
+        .rating-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-again {
+            background: #dc3545;
+        }
+
+        .btn-hard {
+            background: #fd7e14;
+        }
+
+        .btn-good {
+            background: #28a745;
+        }
+
+        .btn-easy {
+            background: #20c997;
+        }
+
+        .filter-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-label {
+            color: white;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-fill {
+            background: #28a745;
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        .reset-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .reset-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .thai-letter {
+                font-size: 8em;
+            }
+
+            .info-value {
+                font-size: 1.1em;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇹🇭 Thai Alphabet Flashcards</h1>
+            <p>Master the Thai consonants with spaced repetition</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="cards-studied">0</span>
+                <span class="stat-label">Studied Today</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="cards-remaining">44</span>
+                <span class="stat-label">Remaining</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="accuracy">0%</span>
+                <span class="stat-label">Accuracy</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-label">Filter by Class:</div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="high">High</button>
+                <button class="filter-btn" data-filter="mid">Mid</button>
+                <button class="filter-btn" data-filter="low">Low</button>
+            </div>
+        </div>
+
+        <div class="card-container">
+            <div class="card" id="flashcard">
+                <div class="card-face card-front">
+                    <div class="thai-letter" id="thai-letter"></div>
+                    <div class="card-hint">Click to reveal</div>
+                </div>
+                <div class="card-face card-back">
+                    <div class="card-info">
+                        <div class="info-item">
+                            <div class="info-label">Romanization</div>
+                            <div class="info-value" id="romanization"></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Consonant Class</div>
+                            <div class="info-value">
+                                <span class="class-badge" id="class-badge"></span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Initial Sound</div>
+                            <div class="info-value" id="initial-sound"></div>
+                        </div>
+                        <div class="info-item" id="interesting-container">
+                            <div class="info-label">💡 Notes</div>
+                            <div class="interesting-info" id="interesting-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-reveal" id="reveal-btn">Reveal Answer</button>
+        </div>
+
+        <div class="rating-buttons" id="rating-buttons" style="display: none;">
+            <button class="btn btn-again" data-rating="again">Again</button>
+            <button class="btn btn-hard" data-rating="hard">Hard</button>
+            <button class="btn btn-good" data-rating="good">Good</button>
+            <button class="btn btn-easy" data-rating="easy">Easy</button>
+        </div>
+
+        <button class="reset-btn" id="reset-btn">Reset All Progress</button>
+    </div>
+
+    <script>
+        // Thai consonants data with Stuart Jay Raj-inspired notes
+        const thaiConsonants = [
+            {
+                thai: 'ก',
+                romanization: 'ก ไก่ (Kor Kai)',
+                class: 'mid',
+                initialSound: 'k (unaspirated)',
+                interesting: 'Chicken. This is the first consonant! Mid class consonants are the base tone markers. Very common in everyday words.'
+            },
+            {
+                thai: 'ข',
+                romanization: 'ข ไข่ (Khor Khai)',
+                class: 'high',
+                initialSound: 'kh (aspirated)',
+                interesting: 'Egg. High class = high tone in live syllables. Notice the little loop on top - this is your clue for high class!'
+            },
+            {
+                thai: 'ฃ',
+                romanization: 'ฃ ขวด (Khor Khuad)',
+                class: 'high',
+                initialSound: 'kh (aspirated)',
+                interesting: '⚠️ OBSOLETE - Bottle. Almost never used in modern Thai. You\'ll rarely see this one!'
+            },
+            {
+                thai: 'ค',
+                romanization: 'ค ควาย (Khor Khwai)',
+                class: 'low',
+                initialSound: 'kh (aspirated)',
+                interesting: 'Buffalo. Low class = rising tone in live syllables. Very common consonant. Compare with ข - same sound, different class!'
+            },
+            {
+                thai: 'ฅ',
+                romanization: 'ฅ คน (Khor Khon)',
+                class: 'low',
+                initialSound: 'kh (aspirated)',
+                interesting: '⚠️ OBSOLETE - Person. No longer used in modern Thai. Only seen in old texts.'
+            },
+            {
+                thai: 'ฆ',
+                romanization: 'ฆ ระฆัง (Khor Rakhang)',
+                class: 'low',
+                initialSound: 'kh (aspirated)',
+                interesting: 'Bell. Rare in everyday use. Mainly appears in Pali/Sanskrit loanwords.'
+            },
+            {
+                thai: 'ง',
+                romanization: 'ง งู (Ngor Ngu)',
+                class: 'low',
+                initialSound: 'ng',
+                interesting: 'Snake. The "ng" sound like in "singing". Common as final consonant. Try saying "nguu" - starts with ng!'
+            },
+            {
+                thai: 'จ',
+                romanization: 'จ จาน (Jor Jan)',
+                class: 'mid',
+                initialSound: 'j (unaspirated)',
+                interesting: 'Plate. Like "j" in "jump". Very common consonant. Another mid-class anchor point!'
+            },
+            {
+                thai: 'ฉ',
+                romanization: 'ฉ ฉิ่ง (Chor Ching)',
+                class: 'high',
+                initialSound: 'ch (aspirated)',
+                interesting: 'Cymbals. Aspirated "ch". Notice the distinctive shape - helps identify high class!'
+            },
+            {
+                thai: 'ช',
+                romanization: 'ช ช้าง (Chor Chang)',
+                class: 'low',
+                initialSound: 'ch (aspirated)',
+                interesting: 'Elephant! Very common. Same sound as ฉ but low class. Remember: elephant = easy to remember!'
+            },
+            {
+                thai: 'ซ',
+                romanization: 'ซ โซ่ (Sor So)',
+                class: 'low',
+                initialSound: 's',
+                interesting: 'Chain. Like "s" in "sea". Often appears in loanwords. Don\'t confuse with ส!'
+            },
+            {
+                thai: 'ฌ',
+                romanization: 'ฌ เฌอ (Chor Choer)',
+                class: 'low',
+                initialSound: 'ch',
+                interesting: 'Tree. Extremely rare! Mostly in formal/royal language and Pali words. You might never see it!'
+            },
+            {
+                thai: 'ญ',
+                romanization: 'ญ หญิง (Yor Ying)',
+                class: 'low',
+                initialSound: 'y',
+                interesting: 'Woman. Distinctive squiggly shape. Common in words like ญี่ปุ่น (Japan). Final consonant = "n"!'
+            },
+            {
+                thai: 'ฎ',
+                romanization: 'ฎ ชฎา (Dor Chada)',
+                class: 'mid',
+                initialSound: 'd (unaspirated)',
+                interesting: 'Headdress. Rare! Mainly in formal/Sanskrit words. Looks like a fancy version of ด.'
+            },
+            {
+                thai: 'ฏ',
+                romanization: 'ฏ ปฏัก (Tor Patak)',
+                class: 'mid',
+                initialSound: 't (unaspirated)',
+                interesting: 'Goad. Very rare in everyday Thai. Appears in Pali/Sanskrit loanwords.'
+            },
+            {
+                thai: 'ฐ',
+                romanization: 'ฐ ฐาน (Thor Than)',
+                class: 'high',
+                initialSound: 'th (aspirated)',
+                interesting: 'Base/pedestal. Rare in common words. Has a distinctive "crown" on top!'
+            },
+            {
+                thai: 'ฑ',
+                romanization: 'ฑ มณโฑ (Thor Montho)',
+                class: 'low',
+                initialSound: 'th (aspirated)',
+                interesting: 'Mandodari (wife of demon). Rare! Mainly in formal/Pali words.'
+            },
+            {
+                thai: 'ฒ',
+                romanization: 'ฒ ผู้เฒ่า (Thor Phuthao)',
+                class: 'low',
+                initialSound: 'th (aspirated)',
+                interesting: 'Elderly person. Rare in everyday use. Formal/literary contexts.'
+            },
+            {
+                thai: 'ณ',
+                romanization: 'ณ เณร (Nor Nen)',
+                class: 'low',
+                initialSound: 'n',
+                interesting: 'Novice monk. Common in names! Final sound = "n". Different from น but same sound.'
+            },
+            {
+                thai: 'ด',
+                romanization: 'ด เด็ก (Dor Dek)',
+                class: 'mid',
+                initialSound: 'd (unaspirated)',
+                interesting: 'Child. Very common! Like "d" in "dog". Simple shape, mid-class = base tone.'
+            },
+            {
+                thai: 'ต',
+                romanization: 'ต เต่า (Tor Tao)',
+                class: 'mid',
+                initialSound: 't (unaspirated)',
+                interesting: 'Turtle. Very common! Like "t" in "stop". Another key mid-class consonant!'
+            },
+            {
+                thai: 'ถ',
+                romanization: 'ถ ถุง (Thor Thung)',
+                class: 'high',
+                initialSound: 'th (aspirated)',
+                interesting: 'Bag. Common word. Aspirated "th" like "t" in "top". High class marker!'
+            },
+            {
+                thai: 'ท',
+                romanization: 'ท ทหาร (Thor Thahan)',
+                class: 'low',
+                initialSound: 'th (aspirated)',
+                interesting: 'Soldier. Very common! Same sound as ถ but low class. Used constantly in Thai.'
+            },
+            {
+                thai: 'ธ',
+                romanization: 'ธ ธง (Thor Thong)',
+                class: 'low',
+                initialSound: 'th (aspirated)',
+                interesting: 'Flag. Less common than ท. Often in formal words. Same sound, different class!'
+            },
+            {
+                thai: 'น',
+                romanization: 'น หนู (Nor Nu)',
+                class: 'low',
+                initialSound: 'n',
+                interesting: 'Mouse/rat. Super common! Like "n" in "no". Also used to say "I" (informal/cute).'
+            },
+            {
+                thai: 'บ',
+                romanization: 'บ ใบไม้ (Bor Baimai)',
+                class: 'mid',
+                initialSound: 'b (unaspirated)',
+                interesting: 'Leaf. Very common! Like "b" in "boy". Key mid-class consonant. Simple circular shape!'
+            },
+            {
+                thai: 'ป',
+                romanization: 'ป ปลา (Por Pla)',
+                class: 'mid',
+                initialSound: 'p (unaspirated)',
+                interesting: 'Fish. Very common! Like "p" in "stop". Essential mid-class consonant!'
+            },
+            {
+                thai: 'ผ',
+                romanization: 'ผ ผึ้ง (Por Phueng)',
+                class: 'high',
+                initialSound: 'ph (aspirated)',
+                interesting: 'Bee. Common! Aspirated "ph" like "p" in "put". Has 4 little lines on top = high class!'
+            },
+            {
+                thai: 'ฝ',
+                romanization: 'ฝ ฝา (For Fa)',
+                class: 'high',
+                initialSound: 'f',
+                interesting: 'Lid/cover. Like "f" in "fun". Looks like ผ with a tail! High class marker.'
+            },
+            {
+                thai: 'พ',
+                romanization: 'พ พาน (Por Phan)',
+                class: 'low',
+                initialSound: 'ph (aspirated)',
+                interesting: 'Tray. Very common! Same sound as ผ but low class. Used extensively in Thai.'
+            },
+            {
+                thai: 'ฟ',
+                romanization: 'ฟ ฟัน (For Fan)',
+                class: 'low',
+                initialSound: 'f',
+                interesting: 'Teeth. Common! Like "f" in "fun". Same sound as ฝ but low class.'
+            },
+            {
+                thai: 'ภ',
+                romanization: 'ภ สำเภา (Por Sampao)',
+                class: 'low',
+                initialSound: 'ph (aspirated)',
+                interesting: 'Sailboat. Less common. Often in formal/Pali words. Distinctive shape!'
+            },
+            {
+                thai: 'ม',
+                romanization: 'ม ม้า (Mor Ma)',
+                class: 'low',
+                initialSound: 'm',
+                interesting: 'Horse. Very common! Like "m" in "mom". Simple, circular with tail. Final = "m"!'
+            },
+            {
+                thai: 'ย',
+                romanization: 'ย ยักษ์ (Yor Yak)',
+                class: 'low',
+                initialSound: 'y',
+                interesting: 'Giant. Very common! Like "y" in "yes". Appears constantly. Distinctive shape!'
+            },
+            {
+                thai: 'ร',
+                romanization: 'ร เรือ (Ror Ruea)',
+                class: 'low',
+                initialSound: 'r',
+                interesting: 'Boat. Very common! Rolled "r". In Bangkok, often pronounced like "l". Final = "n"!'
+            },
+            {
+                thai: 'ฤ',
+                romanization: 'ฤ ฤๅษี (Rue Ruesi)',
+                class: 'low',
+                initialSound: 'rue',
+                interesting: 'Hermit. Special! Acts as vowel + consonant. Pronounced "rue" or "ri". Rare!'
+            },
+            {
+                thai: 'ล',
+                romanization: 'ล ลิง (Lor Ling)',
+                class: 'low',
+                initialSound: 'l',
+                interesting: 'Monkey. Very common! Like "l" in "love". Used extensively. Final = "n"!'
+            },
+            {
+                thai: 'ฦ',
+                romanization: 'ฦ ฦๅ (Lue)',
+                class: 'low',
+                initialSound: 'lue',
+                interesting: 'Super rare! Almost never used. Acts as vowel + consonant. Don\'t worry about this one!'
+            },
+            {
+                thai: 'ว',
+                romanization: 'ว แหวน (Wor Waen)',
+                class: 'low',
+                initialSound: 'w',
+                interesting: 'Ring. Very common! Like "w" in "win". Also acts as vowel sometimes!'
+            },
+            {
+                thai: 'ศ',
+                romanization: 'ศ ศาลา (Sor Sala)',
+                class: 'high',
+                initialSound: 's',
+                interesting: 'Pavilion. Common in formal words. Three different "s" sounds in Thai! This one = high class.'
+            },
+            {
+                thai: 'ษ',
+                romanization: 'ษ ฤๅษี (Sor Ruesri)',
+                class: 'high',
+                initialSound: 's',
+                interesting: 'Hermit. Less common. Formal/Sanskrit words. Same sound as ศ and ส but high class!'
+            },
+            {
+                thai: 'ส',
+                romanization: 'ส เสือ (Sor Suea)',
+                class: 'high',
+                initialSound: 's',
+                interesting: 'Tiger. Very common! The most common "s" consonant. High class. Simple shape!'
+            },
+            {
+                thai: 'ห',
+                romanization: 'ห หีบ (Hor Hip)',
+                class: 'high',
+                initialSound: 'h',
+                interesting: 'Chest/box. Very common! Like "h" in "hello". Also used to modify tone of following consonants!'
+            },
+            {
+                thai: 'ฬ',
+                romanization: 'ฬ จุฬา (Lor Jula)',
+                class: 'low',
+                initialSound: 'l',
+                interesting: 'Kite. Rare! Only in formal/Pali words like จุฬาลงกรณ์ (Chulalongkorn). Don\'t stress this one!'
+            },
+            {
+                thai: 'อ',
+                romanization: 'อ อ่าง (Or Ang)',
+                class: 'mid',
+                initialSound: 'none (glottal stop)',
+                interesting: 'Basin. Very common! Silent/glottal stop. Often used with vowels. Essential consonant!'
+            }
+        ];
+
+        // State management
+        let currentCardIndex = 0;
+        let isFlipped = false;
+        let studiedToday = 0;
+        let correctAnswers = 0;
+        let totalAnswers = 0;
+        let currentFilter = 'all';
+        let filteredCards = [...thaiConsonants];
+
+        // LocalStorage keys
+        const STORAGE_KEY = 'thaiFlashcardsProgress';
+        const SESSION_KEY = 'thaiFlashcardsSession';
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    thaiConsonants.forEach((card, index) => {
+                        if (data[index]) {
+                            card.easeFactor = data[index].easeFactor || 2.5;
+                            card.interval = data[index].interval || 0;
+                            card.lastReviewed = data[index].lastReviewed || null;
+                            card.reviews = data[index].reviews || 0;
+                        }
+                    });
+                } catch (e) {
+                    console.error('Error loading progress:', e);
+                }
+            }
+
+            // Load session data
+            const session = localStorage.getItem(SESSION_KEY);
+            if (session) {
+                try {
+                    const sessionData = JSON.parse(session);
+                    const today = new Date().toDateString();
+                    if (sessionData.date === today) {
+                        studiedToday = sessionData.studied || 0;
+                        correctAnswers = sessionData.correct || 0;
+                        totalAnswers = sessionData.total || 0;
+                    }
+                } catch (e) {
+                    console.error('Error loading session:', e);
+                }
+            }
+        }
+
+        // Save progress to localStorage
+        function saveProgress() {
+            const data = thaiConsonants.map(card => ({
+                easeFactor: card.easeFactor || 2.5,
+                interval: card.interval || 0,
+                lastReviewed: card.lastReviewed || null,
+                reviews: card.reviews || 0
+            }));
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+
+            // Save session data
+            const sessionData = {
+                date: new Date().toDateString(),
+                studied: studiedToday,
+                correct: correctAnswers,
+                total: totalAnswers
+            };
+            localStorage.setItem(SESSION_KEY, JSON.stringify(sessionData));
+        }
+
+        // Get next card based on spaced repetition
+        function getNextCard() {
+            const now = Date.now();
+
+            // Filter cards that need review
+            const dueCards = filteredCards.filter(card => {
+                if (!card.lastReviewed) return true;
+                const daysSinceReview = (now - card.lastReviewed) / (1000 * 60 * 60 * 24);
+                return daysSinceReview >= (card.interval || 0);
+            });
+
+            if (dueCards.length === 0) {
+                // If no due cards, show all filtered cards
+                return filteredCards[Math.floor(Math.random() * filteredCards.length)];
+            }
+
+            // Prioritize cards with lower ease factors (harder cards)
+            dueCards.sort((a, b) => (a.easeFactor || 2.5) - (b.easeFactor || 2.5));
+
+            // Pick from the hardest 30%
+            const hardestCount = Math.max(1, Math.floor(dueCards.length * 0.3));
+            return dueCards[Math.floor(Math.random() * hardestCount)];
+        }
+
+        // Display current card
+        function displayCard() {
+            const card = getNextCard();
+            currentCardIndex = thaiConsonants.indexOf(card);
+
+            document.getElementById('thai-letter').textContent = card.thai;
+            document.getElementById('romanization').textContent = card.romanization;
+            document.getElementById('initial-sound').textContent = card.initialSound;
+            document.getElementById('interesting-info').textContent = card.interesting;
+
+            const classBadge = document.getElementById('class-badge');
+            classBadge.textContent = card.class.toUpperCase() + ' CLASS';
+            classBadge.className = 'class-badge class-' + card.class;
+
+            updateStats();
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('cards-studied').textContent = studiedToday;
+
+            const dueCount = filteredCards.filter(card => {
+                if (!card.lastReviewed) return true;
+                const daysSinceReview = (Date.now() - card.lastReviewed) / (1000 * 60 * 60 * 24);
+                return daysSinceReview >= (card.interval || 0);
+            }).length;
+            document.getElementById('cards-remaining').textContent = dueCount;
+
+            const accuracy = totalAnswers > 0 ? Math.round((correctAnswers / totalAnswers) * 100) : 0;
+            document.getElementById('accuracy').textContent = accuracy + '%';
+
+            const progress = filteredCards.length > 0 ? ((studiedToday / filteredCards.length) * 100) : 0;
+            document.getElementById('progress-fill').style.width = Math.min(100, progress) + '%';
+        }
+
+        // Handle card flip
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+
+            if (isFlipped) {
+                document.getElementById('reveal-btn').style.display = 'none';
+                document.getElementById('rating-buttons').style.display = 'flex';
+            } else {
+                document.getElementById('reveal-btn').style.display = 'block';
+                document.getElementById('rating-buttons').style.display = 'none';
+            }
+        }
+
+        // Handle rating
+        function rateCard(rating) {
+            const card = thaiConsonants[currentCardIndex];
+
+            // Initialize card properties if needed
+            if (!card.easeFactor) card.easeFactor = 2.5;
+            if (!card.interval) card.interval = 0;
+            if (!card.reviews) card.reviews = 0;
+
+            // Update stats
+            studiedToday++;
+            totalAnswers++;
+
+            // Spaced repetition algorithm (simplified SM-2)
+            let quality;
+            switch (rating) {
+                case 'again':
+                    quality = 0;
+                    break;
+                case 'hard':
+                    quality = 3;
+                    correctAnswers++;
+                    break;
+                case 'good':
+                    quality = 4;
+                    correctAnswers++;
+                    break;
+                case 'easy':
+                    quality = 5;
+                    correctAnswers++;
+                    break;
+            }
+
+            // Update ease factor
+            card.easeFactor = Math.max(1.3, card.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
+
+            // Update interval
+            if (quality < 3) {
+                card.interval = 0;
+            } else {
+                if (card.reviews === 0) {
+                    card.interval = 1;
+                } else if (card.reviews === 1) {
+                    card.interval = 6;
+                } else {
+                    card.interval = Math.round(card.interval * card.easeFactor);
+                }
+            }
+
+            card.lastReviewed = Date.now();
+            card.reviews++;
+
+            saveProgress();
+
+            // Reset flip and show next card
+            if (isFlipped) {
+                flipCard();
+            }
+
+            setTimeout(() => {
+                displayCard();
+            }, 300);
+        }
+
+        // Filter cards by class
+        function filterCards(classType) {
+            currentFilter = classType;
+
+            if (classType === 'all') {
+                filteredCards = [...thaiConsonants];
+            } else {
+                filteredCards = thaiConsonants.filter(card => card.class === classType);
+            }
+
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.filter === classType) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Reset flip state and display new card
+            if (isFlipped) {
+                flipCard();
+            }
+
+            displayCard();
+        }
+
+        // Reset all progress
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset all progress? This cannot be undone!')) {
+                localStorage.removeItem(STORAGE_KEY);
+                localStorage.removeItem(SESSION_KEY);
+                studiedToday = 0;
+                correctAnswers = 0;
+                totalAnswers = 0;
+
+                thaiConsonants.forEach(card => {
+                    card.easeFactor = 2.5;
+                    card.interval = 0;
+                    card.lastReviewed = null;
+                    card.reviews = 0;
+                });
+
+                if (isFlipped) {
+                    flipCard();
+                }
+
+                displayCard();
+            }
+        }
+
+        // Event listeners
+        document.getElementById('flashcard').addEventListener('click', flipCard);
+        document.getElementById('reveal-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            flipCard();
+        });
+
+        document.querySelectorAll('[data-rating]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rateCard(btn.dataset.rating);
+            });
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterCards(btn.dataset.filter);
+            });
+        });
+
+        document.getElementById('reset-btn').addEventListener('click', resetProgress);
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                if (!isFlipped) {
+                    flipCard();
+                }
+            } else if (isFlipped) {
+                switch (e.key) {
+                    case '1':
+                        rateCard('again');
+                        break;
+                    case '2':
+                        rateCard('hard');
+                        break;
+                    case '3':
+                        rateCard('good');
+                        break;
+                    case '4':
+                        rateCard('easy');
+                        break;
+                }
+            }
+        });
+
+        // Initialize
+        loadProgress();
+        displayCard();
+    </script>
+</body>
+</html>

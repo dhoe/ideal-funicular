@@ -389,322 +389,322 @@
     </div>
 
     <script>
-        // Thai consonants data with Stuart Jay Raj-inspired notes
+        // Thai consonants data with visual mnemonics and memory aids
         const thaiConsonants = [
             {
                 thai: 'ก',
                 romanization: 'ก ไก่ (Kor Kai)',
                 class: 'mid',
-                initialSound: 'k (unaspirated)',
-                interesting: 'Chicken. This is the first consonant! Mid class consonants are the base tone markers. Very common in everyday words.'
+                initialSound: 'k',
+                interesting: 'Chicken head with beak! Opens to right like "C". First letter = anchor point. Final: -k. Mnemon: "Chicken starts the alphabet"'
             },
             {
                 thai: 'ข',
                 romanization: 'ข ไข่ (Khor Khai)',
                 class: 'high',
-                initialSound: 'kh (aspirated)',
-                interesting: 'Egg. High class = high tone in live syllables. Notice the little loop on top - this is your clue for high class!'
+                initialSound: 'kh',
+                interesting: 'Egg with loop on top. ⚠️ vs ค (no loop). The loop = high class marker. Final: -k. Think: "Egg has crown on top"'
             },
             {
                 thai: 'ฃ',
                 romanization: 'ฃ ขวด (Khor Khuad)',
                 class: 'high',
-                initialSound: 'kh (aspirated)',
-                interesting: '⚠️ OBSOLETE - Bottle. Almost never used in modern Thai. You\'ll rarely see this one!'
+                initialSound: 'kh',
+                interesting: '☠️ OBSOLETE. Skip it unless you read ancient texts. Same as ข with extra squiggle.'
             },
             {
                 thai: 'ค',
                 romanization: 'ค ควาย (Khor Khwai)',
                 class: 'low',
-                initialSound: 'kh (aspirated)',
-                interesting: 'Buffalo. Low class = rising tone in live syllables. Very common consonant. Compare with ข - same sound, different class!'
+                initialSound: 'kh',
+                interesting: 'Buffalo = no loop (vs ข egg). Flat top = low class. Final: -k. Common in คน (person), ครับ. "Buffalo has no crown"'
             },
             {
                 thai: 'ฅ',
                 romanization: 'ฅ คน (Khor Khon)',
                 class: 'low',
-                initialSound: 'kh (aspirated)',
-                interesting: '⚠️ OBSOLETE - Person. No longer used in modern Thai. Only seen in old texts.'
+                initialSound: 'kh',
+                interesting: '☠️ OBSOLETE. ⚠️ Looks like ค. You won\'t see this. Skip it.'
             },
             {
                 thai: 'ฆ',
                 romanization: 'ฆ ระฆัง (Khor Rakhang)',
                 class: 'low',
-                initialSound: 'kh (aspirated)',
-                interesting: 'Bell. Rare in everyday use. Mainly appears in Pali/Sanskrit loanwords.'
+                initialSound: 'kh',
+                interesting: 'Bell shape - has "handle" inside. Rare in daily life, formal words only. Final: -k. Think: "Fancy bell = formal"'
             },
             {
                 thai: 'ง',
                 romanization: 'ง งู (Ngor Ngu)',
                 class: 'low',
                 initialSound: 'ng',
-                interesting: 'Snake. The "ng" sound like in "singing". Common as final consonant. Try saying "nguu" - starts with ng!'
+                interesting: 'Snake! Curved body. Starts with "ng" (si-NG-ing). SUPER common as final -ng. Shape = smooth curve. "Snake says nnnng"'
             },
             {
                 thai: 'จ',
                 romanization: 'จ จาน (Jor Jan)',
                 class: 'mid',
-                initialSound: 'j (unaspirated)',
-                interesting: 'Plate. Like "j" in "jump". Very common consonant. Another mid-class anchor point!'
+                initialSound: 'j',
+                interesting: 'Plate with curl. ⚠️ vs ฉ (has squiggles). Simple = mid class. Final: -t. Common anchor. "Plain plate = plain mid class"'
             },
             {
                 thai: 'ฉ',
                 romanization: 'ฉ ฉิ่ง (Chor Ching)',
                 class: 'high',
-                initialSound: 'ch (aspirated)',
-                interesting: 'Cymbals. Aspirated "ch". Notice the distinctive shape - helps identify high class!'
+                initialSound: 'ch',
+                interesting: 'Cymbals = 2 squiggly lines on side! ⚠️ vs จ (plain). Squiggles = fancy = high. Final: -t. "Cymbals have decorations"'
             },
             {
                 thai: 'ช',
                 romanization: 'ช ช้าง (Chor Chang)',
                 class: 'low',
-                initialSound: 'ch (aspirated)',
-                interesting: 'Elephant! Very common. Same sound as ฉ but low class. Remember: elephant = easy to remember!'
+                initialSound: 'ch',
+                interesting: 'Elephant trunk! Loop + curve like trunk. ⚠️ vs ซ (no loop). VERY common. Final: -t. "Elephant = low to ground"'
             },
             {
                 thai: 'ซ',
                 romanization: 'ซ โซ่ (Sor So)',
                 class: 'low',
                 initialSound: 's',
-                interesting: 'Chain. Like "s" in "sea". Often appears in loanwords. Don\'t confuse with ส!'
+                interesting: 'Chain. ⚠️ vs ช (has loop). Simpler = no loop. Final: -t. Loanwords: ซีดี, ซอฟต์. "Chain links = no loop"'
             },
             {
                 thai: 'ฌ',
                 romanization: 'ฌ เฌอ (Chor Choer)',
                 class: 'low',
                 initialSound: 'ch',
-                interesting: 'Tree. Extremely rare! Mostly in formal/royal language and Pali words. You might never see it!'
+                interesting: '☠️ ULTRA RARE. Royal/Pali only. ⚠️ Don\'t confuse with similar shapes. You can skip this.'
             },
             {
                 thai: 'ญ',
                 romanization: 'ญ หญิง (Yor Ying)',
                 class: 'low',
                 initialSound: 'y',
-                interesting: 'Woman. Distinctive squiggly shape. Common in words like ญี่ปุ่น (Japan). Final consonant = "n"!'
+                interesting: 'Woman = flowing curves (feminine!). Distinctive squiggle. Final: -n. ญี่ปุ่น (Japan). "Woman\'s flowing hair"'
             },
             {
                 thai: 'ฎ',
                 romanization: 'ฎ ชฎา (Dor Chada)',
                 class: 'mid',
-                initialSound: 'd (unaspirated)',
-                interesting: 'Headdress. Rare! Mainly in formal/Sanskrit words. Looks like a fancy version of ด.'
+                initialSound: 'd',
+                interesting: 'Headdress = crown on ด. ⚠️ vs ด (plain circle). Crown = fancy/formal. Final: -t. Rare. "Crowned D = fancy D"'
             },
             {
                 thai: 'ฏ',
                 romanization: 'ฏ ปฏัก (Tor Patak)',
                 class: 'mid',
-                initialSound: 't (unaspirated)',
-                interesting: 'Goad. Very rare in everyday Thai. Appears in Pali/Sanskrit loanwords.'
+                initialSound: 't',
+                interesting: 'Goad = hook tool. ⚠️ vs ต (simpler base). Rare formal words. Final: -t. "Hook = rare tool"'
             },
             {
                 thai: 'ฐ',
                 romanization: 'ฐ ฐาน (Thor Than)',
                 class: 'high',
-                initialSound: 'th (aspirated)',
-                interesting: 'Base/pedestal. Rare in common words. Has a distinctive "crown" on top!'
+                initialSound: 'th',
+                interesting: 'Base = pedestal with decorative "crown". ⚠️ Fancy top = high class. สถาบัน (institute). Final: -t. "Fancy pedestal"'
             },
             {
                 thai: 'ฑ',
                 romanization: 'ฑ มณโฑ (Thor Montho)',
                 class: 'low',
-                initialSound: 'th (aspirated)',
-                interesting: 'Mandodari (wife of demon). Rare! Mainly in formal/Pali words.'
+                initialSound: 'th',
+                interesting: 'Demon\'s wife. Complex shape with middle decoration. Rare formal. Final: -t. Skip unless learning lit.'
             },
             {
                 thai: 'ฒ',
                 romanization: 'ฒ ผู้เฒ่า (Thor Phuthao)',
                 class: 'low',
-                initialSound: 'th (aspirated)',
-                interesting: 'Elderly person. Rare in everyday use. Formal/literary contexts.'
+                initialSound: 'th',
+                interesting: 'Old person = bent shape. Rare literary. Final: -t. "Bent like elderly posture"'
             },
             {
                 thai: 'ณ',
                 romanization: 'ณ เณร (Nor Nen)',
                 class: 'low',
                 initialSound: 'n',
-                interesting: 'Novice monk. Common in names! Final sound = "n". Different from น but same sound.'
+                interesting: 'Novice monk. ⚠️ vs น (has tail). COMMON in names! วรณ, ณรงค์. Final: -n. "Monk\'s special N"'
             },
             {
                 thai: 'ด',
                 romanization: 'ด เด็ก (Dor Dek)',
                 class: 'mid',
-                initialSound: 'd (unaspirated)',
-                interesting: 'Child. Very common! Like "d" in "dog". Simple shape, mid-class = base tone.'
+                initialSound: 'd',
+                interesting: 'Child = simple circle + tail. Clean shape. ⚠️ vs ฎ (crowned). ESSENTIAL. Final: -t. "Kid = simple D"'
             },
             {
                 thai: 'ต',
                 romanization: 'ต เต่า (Tor Tao)',
                 class: 'mid',
-                initialSound: 't (unaspirated)',
-                interesting: 'Turtle. Very common! Like "t" in "stop". Another key mid-class consonant!'
+                initialSound: 't',
+                interesting: 'Turtle = compact base. ⚠️ vs ฏ (fancier). SUPER common. Final: -t. Key anchor! "Turtle = solid T base"'
             },
             {
                 thai: 'ถ',
                 romanization: 'ถ ถุง (Thor Thung)',
                 class: 'high',
-                initialSound: 'th (aspirated)',
-                interesting: 'Bag. Common word. Aspirated "th" like "t" in "top". High class marker!'
+                initialSound: 'th',
+                interesting: 'Bag = base with vertical line. ⚠️ vs ท (has ascending curl). Vertical = high. Final: -t. "Bag stands tall"'
             },
             {
                 thai: 'ท',
                 romanization: 'ท ทหาร (Thor Thahan)',
                 class: 'low',
-                initialSound: 'th (aspirated)',
-                interesting: 'Soldier. Very common! Same sound as ถ but low class. Used constantly in Thai.'
+                initialSound: 'th',
+                interesting: 'Soldier = ต with ascending arm salute! ⚠️ vs ถ (just vertical). VERY common. Final: -t. "Soldier saluting"'
             },
             {
                 thai: 'ธ',
                 romanization: 'ธ ธง (Thor Thong)',
                 class: 'low',
-                initialSound: 'th (aspirated)',
-                interesting: 'Flag. Less common than ท. Often in formal words. Same sound, different class!'
+                initialSound: 'th',
+                interesting: 'Flag = wave on top of base. ⚠️ Less common than ท. ธนาคาร (bank). Final: -t. "Flag waves"'
             },
             {
                 thai: 'น',
                 romanization: 'น หนู (Nor Nu)',
                 class: 'low',
                 initialSound: 'n',
-                interesting: 'Mouse/rat. Super common! Like "n" in "no". Also used to say "I" (informal/cute).'
+                interesting: 'Mouse = rounded with small tail. ⚠️ vs ณ (elaborate). EVERYWHERE! Final: -n. "I" pronoun. "Mouse = cute simple n"'
             },
             {
                 thai: 'บ',
                 romanization: 'บ ใบไม้ (Bor Baimai)',
                 class: 'mid',
-                initialSound: 'b (unaspirated)',
-                interesting: 'Leaf. Very common! Like "b" in "boy". Key mid-class consonant. Simple circular shape!'
+                initialSound: 'b',
+                interesting: 'Leaf = oval opening to left. ⚠️ vs ป (has vertical). ไม่บัน common. Final: -p. "Leaf = open circle"'
             },
             {
                 thai: 'ป',
                 romanization: 'ป ปลา (Por Pla)',
                 class: 'mid',
-                initialSound: 'p (unaspirated)',
-                interesting: 'Fish. Very common! Like "p" in "stop". Essential mid-class consonant!'
+                initialSound: 'p',
+                interesting: 'Fish = บ with vertical fin! ⚠️ vs บ (no fin). ESSENTIAL. Final: -p. "Fish has dorsal fin"'
             },
             {
                 thai: 'ผ',
                 romanization: 'ผ ผึ้ง (Por Phueng)',
                 class: 'high',
-                initialSound: 'ph (aspirated)',
-                interesting: 'Bee. Common! Aspirated "ph" like "p" in "put". Has 4 little lines on top = high class!'
+                initialSound: 'ph',
+                interesting: 'Bee = 4 legs (lines) on top! ⚠️ vs พ (3 legs). 4 = high class. Final: -p. "Bee has 4 legs buzzing high"'
             },
             {
                 thai: 'ฝ',
                 romanization: 'ฝ ฝา (For Fa)',
                 class: 'high',
                 initialSound: 'f',
-                interesting: 'Lid/cover. Like "f" in "fun". Looks like ผ with a tail! High class marker.'
+                interesting: 'Lid = ผ with hanging tail! ⚠️ vs ผ (no tail). Tail = lid handle. Final: -p. "Lid hangs down"'
             },
             {
                 thai: 'พ',
                 romanization: 'พ พาน (Por Phan)',
                 class: 'low',
-                initialSound: 'ph (aspirated)',
-                interesting: 'Tray. Very common! Same sound as ผ but low class. Used extensively in Thai.'
+                initialSound: 'ph',
+                interesting: 'Tray = 3 legs. ⚠️ vs ผ (4 legs). Less legs = low. SUPER common. Final: -p. "Tray on 3 legs"'
             },
             {
                 thai: 'ฟ',
                 romanization: 'ฟ ฟัน (For Fan)',
                 class: 'low',
                 initialSound: 'f',
-                interesting: 'Teeth. Common! Like "f" in "fun". Same sound as ฝ but low class.'
+                interesting: 'Teeth = 3 legs + tail. ⚠️ vs ฝ (4 legs). Common! Final: -p. "Teeth hang down"'
             },
             {
                 thai: 'ภ',
                 romanization: 'ภ สำเภา (Por Sampao)',
                 class: 'low',
-                initialSound: 'ph (aspirated)',
-                interesting: 'Sailboat. Less common. Often in formal/Pali words. Distinctive shape!'
+                initialSound: 'ph',
+                interesting: 'Sailboat = unique wrapped shape. ⚠️ Distinctive! ภาษา (language), ภูเขา (mountain). Final: -p. "Boat sails wrap"'
             },
             {
                 thai: 'ม',
                 romanization: 'ม ม้า (Mor Ma)',
                 class: 'low',
                 initialSound: 'm',
-                interesting: 'Horse. Very common! Like "m" in "mom". Simple, circular with tail. Final = "m"!'
+                interesting: 'Horse = circle + tail. ⚠️ vs ท (has arm). EVERYWHERE! Final: -m. "mmmmm" sound. "Horse tail swishes"'
             },
             {
                 thai: 'ย',
                 romanization: 'ย ยักษ์ (Yor Yak)',
                 class: 'low',
                 initialSound: 'y',
-                interesting: 'Giant. Very common! Like "y" in "yes". Appears constantly. Distinctive shape!'
+                interesting: 'Giant = tall shape with loop. Distinctive! VERY common. Final: -y. ยาก, ยัง. "Giant towers tall"'
             },
             {
                 thai: 'ร',
                 romanization: 'ร เรือ (Ror Ruea)',
                 class: 'low',
                 initialSound: 'r',
-                interesting: 'Boat. Very common! Rolled "r". In Bangkok, often pronounced like "l". Final = "n"!'
+                interesting: 'Boat = curved sail. ⚠️ BKK: r→l sound! ESSENTIAL. Final: -n (!). รถ, รัก. "Boat sail curves"'
             },
             {
                 thai: 'ฤ',
                 romanization: 'ฤ ฤๅษี (Rue Ruesi)',
                 class: 'low',
-                initialSound: 'rue',
-                interesting: 'Hermit. Special! Acts as vowel + consonant. Pronounced "rue" or "ri". Rare!'
+                initialSound: 'ri/rue',
+                interesting: 'Hermit. SPECIAL: ร + vowel built-in! ฤดู (season). Rare. Final: -n. "Hermit hides vowel inside"'
             },
             {
                 thai: 'ล',
                 romanization: 'ล ลิง (Lor Ling)',
                 class: 'low',
                 initialSound: 'l',
-                interesting: 'Monkey. Very common! Like "l" in "love". Used extensively. Final = "n"!'
+                interesting: 'Monkey = wavy like tail! ⚠️ vs ย (different waves). COMMON. Final: -n. ลาก, เล่น. "Monkey\'s curly tail"'
             },
             {
                 thai: 'ฦ',
                 romanization: 'ฦ ฦๅ (Lue)',
                 class: 'low',
                 initialSound: 'lue',
-                interesting: 'Super rare! Almost never used. Acts as vowel + consonant. Don\'t worry about this one!'
+                interesting: '☠️ ULTRA RARE. ล + built-in vowel. You\'ll never see it. Skip completely!'
             },
             {
                 thai: 'ว',
                 romanization: 'ว แหวน (Wor Waen)',
                 class: 'low',
                 initialSound: 'w',
-                interesting: 'Ring. Very common! Like "w" in "win". Also acts as vowel sometimes!'
+                interesting: 'Ring = circle shape! Also acts as -ว vowel! วัน (day). Final: -w. DUAL PURPOSE! "Ring = perfect circle"'
             },
             {
                 thai: 'ศ',
                 romanization: 'ศ ศาลา (Sor Sala)',
                 class: 'high',
                 initialSound: 's',
-                interesting: 'Pavilion. Common in formal words. Three different "s" sounds in Thai! This one = high class.'
+                interesting: 'Pavilion = elaborate temple shape. ⚠️ 3 S sounds! This = formal. ศาสตร์. Final: -t. "Temple = high formal"'
             },
             {
                 thai: 'ษ',
                 romanization: 'ษ ฤๅษี (Sor Ruesri)',
                 class: 'high',
                 initialSound: 's',
-                interesting: 'Hermit. Less common. Formal/Sanskrit words. Same sound as ศ and ส but high class!'
+                interesting: 'Hermit = complex grid. ⚠️ vs ศ, ส. Rare formal. บริษัท (company). Final: -t. "Hermit\'s complex grid"'
             },
             {
                 thai: 'ส',
                 romanization: 'ส เสือ (Sor Suea)',
                 class: 'high',
                 initialSound: 's',
-                interesting: 'Tiger. Very common! The most common "s" consonant. High class. Simple shape!'
+                interesting: 'Tiger = coiled spring! Simplest S. MOST COMMON S! Final: -t. สวย, สบาย. "Tiger coils to pounce"'
             },
             {
                 thai: 'ห',
                 romanization: 'ห หีบ (Hor Hip)',
                 class: 'high',
                 initialSound: 'h',
-                interesting: 'Chest/box. Very common! Like "h" in "hello". Also used to modify tone of following consonants!'
+                interesting: 'Chest = box shape with loop. MAGIC: makes low→high! หมา, หนู. Final: silent. "Box holds tone magic"'
             },
             {
                 thai: 'ฬ',
                 romanization: 'ฬ จุฬา (Lor Jula)',
                 class: 'low',
                 initialSound: 'l',
-                interesting: 'Kite. Rare! Only in formal/Pali words like จุฬาลงกรณ์ (Chulalongkorn). Don\'t stress this one!'
+                interesting: '☠️ RARE. Fancy L. Only: จุฬา (Chula Uni), เฬ. Final: -n. Skip unless scholar.'
             },
             {
                 thai: 'อ',
                 romanization: 'อ อ่าง (Or Ang)',
                 class: 'mid',
-                initialSound: 'none (glottal stop)',
-                interesting: 'Basin. Very common! Silent/glottal stop. Often used with vowels. Essential consonant!'
+                initialSound: 'glottal stop',
+                interesting: 'Basin = empty circle! GLOTTAL STOP or silent. ESSENTIAL vowel holder! อา, อี. "Empty basin holds vowels"'
             }
         ];
 

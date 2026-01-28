@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IOM Bangkok Office - 30 Min Commute Radius</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 210mm; height: 297mm;
+    font-family: Helvetica, Arial, sans-serif;
+    display: flex; flex-direction: column;
+  }
+  .header {
+    text-align: center;
+    padding: 12px 0 6px;
+  }
+  .header h1 {
+    font-size: 16px;
+    margin-bottom: 3px;
+  }
+  .header p {
+    font-size: 10px;
+    color: #555;
+  }
+  #map {
+    flex: 1;
+    margin: 0 15mm;
+  }
+  .footer {
+    text-align: center;
+    font-size: 8px;
+    color: #777;
+    padding: 6px 0;
+  }
+  .legend {
+    background: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .legend i {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 5px;
+    vertical-align: middle;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>IOM Bangkok Office &mdash; 30 Minute Commute Radius</h1>
+  <p>120 Soi Soonvijai 4, Bangkapi, Huai Khwang, Bangkok 10310, Thailand</p>
+</div>
+<div id="map"></div>
+<div class="footer">
+  Blue circle: ~6 km radius (~30 min commute in Bangkok traffic) &nbsp;|&nbsp; Map &copy; OpenStreetMap contributors
+</div>
+<script>
+  var lat = 13.7563, lon = 100.5855;
+  var map = L.map('map', { zoomControl: false, attributionControl: false }).setView([lat, lon], 13);
+
+  // Try multiple tile providers
+  var tileLoaded = false;
+  var tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  });
+  tileLayer.on('tileerror', function() {
+    if (!tileLoaded) {
+      tileLoaded = true;
+      map.removeLayer(tileLayer);
+      // Fallback: CartoDB
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19,
+        subdomains: 'abcd'
+      }).addTo(map);
+    }
+  });
+  tileLayer.addTo(map);
+
+  // 30-min commute radius circle (~6 km)
+  L.circle([lat, lon], {
+    radius: 6000,
+    color: '#4285F4',
+    fillColor: '#4285F4',
+    fillOpacity: 0.1,
+    weight: 2.5
+  }).addTo(map);
+
+  // IOM office marker
+  L.circleMarker([lat, lon], {
+    radius: 8,
+    fillColor: '#e53935',
+    color: '#b71c1c',
+    weight: 2,
+    fillOpacity: 1
+  }).addTo(map).bindPopup('<b>IOM Bangkok Regional Office</b><br>120 Soi Soonvijai 4');
+
+  // Legend
+  var legend = L.control({ position: 'bottomright' });
+  legend.onAdd = function() {
+    var div = L.DomUtil.create('div', 'legend');
+    div.innerHTML =
+      '<i style="background:#e53935"></i> IOM Office<br>' +
+      '<i style="background:#4285F4; opacity:0.4"></i> ~30 min commute';
+    return div;
+  };
+  legend.addTo(map);
+
+  // Signal when tiles are loaded
+  map.whenReady(function() {
+    setTimeout(function() {
+      document.title = 'MAP_READY';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
